@@ -1,0 +1,45 @@
+name: Deploy PR67 iPhone Safari preview
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-preview.yml'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: isolated-pr67-preview
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout exact PR67 source branch
+        uses: actions/checkout@v4
+        with:
+          repository: hide19770225-lab/line-stamp-maker
+          ref: fix/diagonal-white-paw-attachment-20261019
+          persist-credentials: false
+      - name: Prepare standalone static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          tar --exclude=.git --exclude=.github --exclude=_site --exclude=node_modules --exclude=tests --exclude=docs -cf - . | tar -xf - -C _site
+          touch _site/.nojekyll
+          test -f _site/index.html
+          git rev-parse HEAD > _site/source-commit.txt
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Publish independent preview
+        id: deployment
+        uses: actions/deploy-pages@v4

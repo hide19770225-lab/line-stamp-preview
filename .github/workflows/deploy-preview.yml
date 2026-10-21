@@ -19,7 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Redeploy whenever the tested source branch receives a verified fix.
+      # Redeploy updated tile extraction and Safari cache-busting fix.
       - name: Checkout exact PR67 source branch
         uses: actions/checkout@v4
         with:

@@ -19,7 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Redeploy updated tile extraction and Safari cache-busting fix.
+      # Redeploy updated visual-review checkbox and error guidance.
       - name: Checkout exact PR67 source branch
         uses: actions/checkout@v4
         with:

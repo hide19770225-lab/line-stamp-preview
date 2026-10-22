@@ -19,7 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Redeploy finite auto-layout diagnostics and Safari cache refresh.
+      # Redeploy left/right detached fragment diagnostics for visual review.
       - name: Checkout exact PR67 source branch
         uses: actions/checkout@v4
         with:

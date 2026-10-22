@@ -19,7 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Redeploy per-row boundary correction for 40-sticker sheet.
+      # Redeploy finite auto-layout diagnostics and Safari cache refresh.
       - name: Checkout exact PR67 source branch
         uses: actions/checkout@v4
         with:

@@ -19,7 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Redeploy persistent ZIP-save error diagnostics for iPhone.
+      # Redeploy direct user-tapped ZIP download link for iPhone.
       - name: Checkout exact PR67 source branch
         uses: actions/checkout@v4
         with:
